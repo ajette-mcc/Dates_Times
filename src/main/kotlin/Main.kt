@@ -14,10 +14,7 @@ fun main(args: Array<String>) {
     var full_moon_interval = 29.53
     var next_full_moon = LocalDate.of(2022, Month.FEBRUARY, 16)
 
-    var userdate = LocalDate.of(2022, Month.MARCH, 18)
-
-    println("Unformatted date is: $today")
-    println("Today is: ${today.format(formatter)}")
+    var userdate = next_full_moon
 
     println("Program will calculate the next full moon either from today or from some selected day in 2022")
     println("Unfortunately, there may be some rounding off error and the date may be off by 1 day")
@@ -31,7 +28,7 @@ fun main(args: Array<String>) {
         userdate = LocalDate.of(year, tempMonth, tempDay)
     }
     else userdate = today
-    println("$userdate")
+    println("The date we will use is ${userdate.format(formatter)}")
 
     var tempdate = next_full_moon
     var increment = 0F
@@ -40,7 +37,6 @@ fun main(args: Array<String>) {
     while (userdate.isBefore(tempdate.minusDays(full_moon_interval.toLong()))) {
         increment = (increment + full_moon_interval).toFloat()
         tempdate = next_full_moon.minusDays(increment.roundToInt().toLong())
-        println(+increment.roundToInt())
     }
 
     // If user entry date is in LATE 2022, must add to Current Next Full Moon to calculate that Next Full Moon
@@ -48,6 +44,6 @@ fun main(args: Array<String>) {
         increment = (increment + full_moon_interval).toFloat()
         tempdate = next_full_moon.plusDays(increment.roundToInt().toLong())
     }
-    println("Unformatted date of the next full moon after your input date will be $tempdate")
+//    println("Unformatted date of the next full moon after your input date will be $tempdate")
     println("Formatted date of the next full moon after your input date will be ${tempdate.format(formatter)}")
 }
